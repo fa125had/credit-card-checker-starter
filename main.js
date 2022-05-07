@@ -40,6 +40,7 @@ const batch = [
 
 // Add your functions below:
 const validateCred = (cardNumber) => {
+  //console.log(cardNumber); //debug log
   let sumChecker = 0;
   for (let i = cardNumber.length - 1; i >= 0; i--) {
     sumChecker = sumChecker + cardNumber[i];
@@ -58,15 +59,15 @@ const validateCred = (cardNumber) => {
   }
   if (sumChecker % 10 === 0) {
     console.log(
-      "Card is Valid. card number: " + cardNumber + "         //Valid"
+      "Card is Valid. card number: " + cardNumber.join("") + " //Valid"
     ); //debug log
     return true;
   } else {
     console.log(
-      "Card is not Valid, check and try again." +
+      "Card is not Valid, check and try again. " +
         "card number: " +
-        cardNumber +
-        "         //Invalid"
+        cardNumber.join("") +
+        " //Invalid"
     ); //debug log
     return false;
   }
@@ -116,6 +117,12 @@ const idInvalidCardCompanies = (invalids) => {
   return companies;
 };
 
-//validateCred([4, 5, 3, 9, 6, 8, 9, 8, 8, 7, 7, 0, 5, 7, 9, 8]);
-//validateCred([1, 2, 3]);
-console.log(idInvalidCardCompanies(findInvalidCards(batch)));
+const checkMyCard = (cardNumber) => {
+  let toNum = (num) => Number(num);
+  let arr = Array.from(String(cardNumber), toNum);
+  return validateCred(arr);
+};
+
+//console.log(idInvalidCardCompanies(findInvalidCards(batch))); //Batch Checker
+
+checkMyCard(4844051398444670); //singel card checker
